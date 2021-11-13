@@ -1,0 +1,48 @@
+!
+! Parameters for silica and silica surfaces
+! Emami et al. Chem. Mater. 26, 2647--2658 (2014).
+! http://dx.doi.org/10.1021/cm500365c
+!
+BONDS
+!
+!V(bond) = Kb(b - b0)**2
+!
+!Kb: kcal/mole/A**2
+!b0: A
+!
+!atom type          Kb        b0
+SISLC     OSLC      285.0     1.68
+SISLC     OHSLC     285.0     1.68
+OHSLC     HSLC      495.0     0.945
+
+ANGLES
+!
+!V(angle) = Ktheta(Theta - Theta0)**2
+!
+!V(Urey-Bradley) = Kub(S - S0)**2
+!
+!Ktheta: kcal/mole/rad**2
+!Theta0: degrees
+!Kub: kcal/mole/A**2 (Urey-Bradley)
+!S0: A
+!
+!atom types                   Ktheta    Theta0    Kub       S0
+OSLC      SISLC     OSLC      100.0     109.5
+OHSLC     SISLC     OSLC      100.0     109.5
+OSLC      SISLC     OHSLC     100.0     109.5
+OHSLC     SISLC     OHSLC     100.0     109.5
+SISLC     OSLC      SISLC     100.0     149.0
+SISLC     OHSLC     HSLC       50.0     115.0
+
+NONBONDED
+!
+!V(Lennard-Jones) = Eps,i,j[(Rmin,i,j/ri,j)**12 - 2(Rmin,i,j/ri,j)**6]
+!
+!epsilon: kcal/mole, Eps,i,j = sqrt(eps,i * eps,j)
+!Rmin/2: A, Rmin,i,j = Rmin/2,i + Rmin/2,j
+!
+!atom     ignored   epsilon   Rmin/2    ignored   eps,1-4   Rmin/2,1-4
+SISLC     0.0       -0.093    2.075     0.0       -0.093    2.075
+OSLC      0.0       -0.054    1.735     0.0       -0.054    1.735
+OHSLC     0.0       -0.054    1.735     0.0       -0.054    1.735
+HSLC      0.0       -0.015    0.5425    0.0       -0.015    0.5425
