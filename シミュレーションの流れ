@@ -1,12 +1,11 @@
 cd SiO2_??A/model
-./run.sh（直方体シリカをモデリングし、そこに?? Åの穴をあけた）
+./run.sh 		# 直方体シリカをモデリングし、そこに?? Åの穴をあけた後、不要な原子の削除、表面に露出している全ての-Oを-OHにプロトン化
 cd ../deprotonate/
-./run.sh
-
-python depRate.pyで脱プロトン化率を計算し、0.13に近い値になるまで、./run.shを繰り返す。
+./run.sh 		# 表面のSiに結合する二つの-OHの内の一つを24.9%の確率で-O Na+に変更（脱プロトン化）
+python depRate.py 	# 脱プロトン化率を計算。0.13に近い値になるまで ./run.sh → python depRate.py を繰り返す。
 
 cd ../berberine/model/
-./run.sh
+./run.sh		
 cd ../namd.wat/
 ./generate_equil.pl
 cd equil
