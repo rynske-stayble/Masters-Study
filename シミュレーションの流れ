@@ -1,21 +1,19 @@
 cd SiO2_??A/model
-./run.sh 		# 直方体シリカをモデリングし、そこに?? Åの穴をあけた後、不要な原子の削除、表面に露出している全ての-Oを-OHにプロトン化
+./run.sh　　　# 直方体シリカをモデリングし、そこに?? Åの穴をあけた後、不要な原子の削除、表面に露出している全ての-Oを-OHにプロトン化
 cd ../deprotonate/
-./run.sh 		# 表面のSiに結合する二つの-OHの内の一つを24.9%の確率で-O Na+に変更（脱プロトン化）
-python depRate.py 	# 脱プロトン化率を計算。0.13に近い値になるまで ./run.sh → python depRate.py を繰り返す。
+./run.sh　　　# 表面のSiに結合する二つの-OHの内の一つを24.9%の確率で-O Na+に変更（脱プロトン化）
+python depRate.py 　　# 脱プロトン化率を計算。0.13に近い値になるまで ./run.sh → python depRate.py を繰り返す。
 
 cd ../berberine/model/
-./run.sh		
+./run.sh　　　# berberinという薬剤分子をシリカ筒の中央に配置。系全体に水分子を導入。
 cd ../namd.wat/
-./generate_equil.pl
+./generate_equil.pl　# 平衡化シミュレーションを実行するためのインプットファイル群を生成
 cd equil
-qsub ./run.sh
-ここまでで、シリカに?? Åの穴をあけて、そこにberberinという薬剤を入れてシミュレーション（平衡化）を行っている。
+qsub ./run.sh 　　　　# エネルギー平衡化シミュレーションを実行
 
 cd .. 
-./generate_prod.pl
-./qsub.sh
-ここでは、5 nsのMDシミュレーションを20回行っている。乱数を用いたLangevin dynamicsなのでそれぞれが異なるトラジジェクトリになる。
+./generate_prod.pl # プロダクションランを実行するためのインプットファイル群を生成
+./qsub.sh # 5 nsのMDシミュレーションを20回実行。乱数を用いたLangevin dynamicsなのでそれぞれが異なるトラジジェクトリになる。
 
 ジョブ終了後、解析を行う。
 cd /data3/ryonosukearaki/SiO2_??A/berberine/namd.wat/analysis/calc_com
