@@ -22,3 +22,6 @@ cd /data3/ryonosukearaki/SiO2_??A/berberine/namd.wat/analysis/calc_com
 ./average2.pl
 これで、Mean Square Displacement（MSD, 平均二乗変位）の平均値が記述されたファイルave_msd.csvが生成される。
 このMSDの経時変化のグラフの傾きから拡散係数を算出する。
+
+
+ここまで一連の操作が完了したら、Si02_??A/model/create_pore.tclのradiusの値を変更し、同様の手順を繰り返す。
