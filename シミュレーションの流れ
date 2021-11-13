@@ -1,0 +1,27 @@
+cd SiO2_??A/model
+./run.sh（直方体シリカをモデリングし、そこに?? Åの穴をあけた）
+cd ../deprotonate/
+./run.sh
+
+python depRate.pyで脱プロトン化率を計算し、0.13に近い値になるまで、./run.shを繰り返す。
+
+cd ../berberine/model/
+./run.sh
+cd ../namd.wat/
+./generate_equil.pl
+cd equil
+qsub ./run.sh
+ここまでで、シリカに?? Åの穴をあけて、そこにberberinという薬剤を入れてシミュレーション（平衡化）を行っている。
+
+cd .. 
+./generate_prod.pl
+./qsub.sh
+ここでは、5 nsのMDシミュレーションを20回行っている。乱数を用いたLangevin dynamicsなのでそれぞれが異なるトラジジェクトリになる。
+
+ジョブ終了後、解析を行う。
+cd /data3/ryonosukearaki/SiO2_??A/berberine/namd.wat/analysis/calc_com
+./vmd.sh
+./calc_msd_1ps.pl
+./average2.pl
+これで、Mean Square Displacement（MSD, 平均二乗変位）の平均値が記述されたファイルave_msd.csvが生成される。
+このMSDの経時変化のグラフの傾きから拡散係数を算出する。
